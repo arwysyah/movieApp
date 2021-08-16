@@ -2,14 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  Dimensions,
+  Image,
+  //   Dimensions,
   StyleSheet,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
 import axios, {AxiosResponse} from 'axios';
-import {token, baseUrl} from '../config/index';
+import {token, baseUrl, popularMoviesUrl} from '../config/index';
 import {IStateData} from './utils/Interface';
+import HorizontalScreen from '../components/HorizontalScreen';
 
 // const {width, height}: any | any = Dimensions.get('screen');
 
@@ -23,16 +25,17 @@ const Home: React.FC = () => {
   const fetchDataMovies = (): void => {
     setLoading(true);
     axios
-      .get<IStateData[]>(baseUrl + token)
+      .get<IStateData[]>(popularMoviesUrl + token)
       .then((response: AxiosResponse) => setData(response.data.results))
       .then(() => setLoading(false));
   };
 
   const renderItem = ({item}: {item: IStateData}) => {
-    return <Text style={styles.txt}>{item.overview}ss</Text>;
+    return <View></View>;
   };
   return (
     <View style={styles.container}>
+      <HorizontalScreen />
       {!isLoading ? (
         <FlatList
           // scrollEventThrottle={16}
@@ -41,7 +44,7 @@ const Home: React.FC = () => {
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
-          contentContainerStyle={{alignItems: 'center'}}
+          //   contentContainerStyle={{alignItems: 'center'}}
         />
       ) : (
         <ActivityIndicator size="large" color="red" />
@@ -55,6 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'black',
   },
   txt: {color: 'black', fontSize: 14},
 });

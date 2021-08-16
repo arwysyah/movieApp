@@ -1,2 +1,18 @@
-import {token, baseUrl} from './config';
-export {token, baseUrl};
+import {
+  token,
+  baseUrl,
+  imageUrl,
+  popularMoviesUrl,
+  PopularTvShowsUrl,
+  latestMoviesUrl,
+  topRatedMoviesUrl,
+} from './config';
+export {
+  token,
+  baseUrl,
+  imageUrl,
+  popularMoviesUrl,
+  PopularTvShowsUrl,
+  latestMoviesUrl,
+  topRatedMoviesUrl,
+};
