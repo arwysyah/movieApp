@@ -1,12 +1,11 @@
 import React, {ReactNode} from 'react';
-
-import {View, Text} from 'react-native';
+import Home from './src/screen/Home';
 
 const App: ReactNode = () => {
   return (
-    <View>
-      <Text>initial</Text>
-    </View>
+    <>
+      <Home />
+    </>
   );
 };
 export default App;
