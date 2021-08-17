@@ -1,7 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   Animated,
   Dimensions,
@@ -11,10 +10,15 @@ import {
 } from 'react-native';
 
 import {globalStyle, spacing} from '../components/styles';
-
+import {StackNavigationProp} from '@react-navigation/stack';
 const {height, width} = Dimensions.get('window');
+import {RootStackParamList, Stacks} from '../screen/utils/Interface';
 const SIZE = height / 32;
-export default function SplashScreen() {
+
+export type Props = {
+  navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
+};
+export default function SplashScreen({navigation}: Props) {
   const moveLeft = useRef(new Animated.Value(0)).current;
   const moveRight = useRef(new Animated.Value(0)).current;
 
@@ -38,6 +42,7 @@ export default function SplashScreen() {
         duration: 1000,
         useNativeDriver: true,
       }).start();
+      moveDrawer();
     }, 1800);
   }, []);
 
@@ -70,6 +75,9 @@ export default function SplashScreen() {
     //     duration: 1000,
     //     useNativeDriver: true,
     //   }).start();
+    await setTimeout(() => {
+      navigation.navigate('Home');
+    }, 600);
   }
   const rotateImage = rotateValue.interpolate({
     inputRange: [0, 1],

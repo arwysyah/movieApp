@@ -21,12 +21,20 @@ import {
 import {token, popularMoviesUrl, imageUrl} from '../config/index';
 import axios, {AxiosResponse} from 'axios';
 import {IStateData} from '../screen/utils/Interface';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList, Stacks} from '../screen/utils/Interface';
+import {useNavigation} from '@react-navigation/native';
+export type Props = {
+  navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
+};
 
 // import {useSelector} from 'react-redux';
 
 const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
 
 const HorizontalScreen: React.FC = () => {
+  const navigation: Props = useNavigation();
   const [data, setData] = useState<IStateData[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   useEffect(() => {
@@ -54,16 +62,16 @@ const HorizontalScreen: React.FC = () => {
       outputRange: [-width * 0.7, 0, width * 0.7],
     });
     return (
-      <View
-      //   onPress={() =>
-      //     navigation.navigate('Movies', {
-      //       item: item,
-      //     })
-      //   }
-      >
+      <View>
         <View style={styles.containerImage}>
           <View style={styles.wrapperView}>
-            <View style={styles.secondWrapper}>
+            <TouchableOpacity
+              style={styles.secondWrapper}
+              onPress={() =>
+                navigation.navigate('Details', {
+                  item: item,
+                })
+              }>
               {item.poster_path === undefined ? (
                 <View>
                   <Text style={styles.txtHorizontal}>
@@ -86,7 +94,7 @@ const HorizontalScreen: React.FC = () => {
                   resizeMode="cover"
                 />
               )}
-            </View>
+            </TouchableOpacity>
           </View>
 
           <Image

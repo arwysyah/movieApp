@@ -10,3 +10,13 @@ export interface IStateData {
   vote_average: number;
   popularity: number;
 }
+export enum Stacks {
+  home = 'Home',
+  details = 'Details',
+  splashScreen = 'SplashScreen',
+}
+export type RootStackParamList = {
+  Home: undefined;
+  Details: {item: IStateData};
+  SplashScreen: undefined;
+};

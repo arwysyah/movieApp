@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  //   Dimensions,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import axios, {AxiosResponse} from 'axios';
-import {token, baseUrl, popularMoviesUrl} from '../config/index';
+import {token, popularMoviesUrl} from '../config/index';
 import {IStateData} from './utils/Interface';
 import HorizontalScreen from '../components/HorizontalScreen';
+import VerticalContent from '../components/VerticalContent';
 
-// const {width, height}: any | any = Dimensions.get('screen');
+import {RootStackParamList, Stacks} from '../screen/utils/Interface';
+export type Props = {
+  navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
+};
 
 const Home: React.FC = () => {
   const [data, setData] = useState<IStateData[]>([]);
@@ -30,34 +27,25 @@ const Home: React.FC = () => {
       .then(() => setLoading(false));
   };
 
-  const renderItem = ({item}: {item: IStateData}) => {
-    return <View></View>;
-  };
   return (
-    <View style={styles.container}>
-      <HorizontalScreen />
-      {!isLoading ? (
-        <FlatList
-          // scrollEventThrottle={16}
-          data={data}
-          //   initialNumToRender={7}
-          keyExtractor={(item, index) => index.toString()}
-          showsVerticalScrollIndicator={false}
-          renderItem={renderItem}
-          //   contentContainerStyle={{alignItems: 'center'}}
-        />
-      ) : (
-        <ActivityIndicator size="large" color="red" />
-      )}
-    </View>
+    <ScrollView style={styles.container}>
+      <View>
+        <HorizontalScreen />
+      </View>
+      <View>
+        <ScrollView>
+          <VerticalContent />
+        </ScrollView>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: 'black',
   },
   txt: {color: 'black', fontSize: 14},

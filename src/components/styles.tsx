@@ -35,7 +35,7 @@ const globalStyle = StyleSheet.create({
     color: '#E0E5EC',
   },
   cardContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'black',
     opacity: 0.8,
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -64,7 +64,7 @@ const globalStyle = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    color: 'black',
+    color: '#FFFFFF',
     paddingLeft: spacing + 10,
     top: spacing * 2.5,
     // justifyContent:'c'
@@ -76,24 +76,24 @@ const globalStyle = StyleSheet.create({
     // justifyContent:'c'
   },
   smallText: {
-    fontSize: 12,
-    color: black,
+    fontSize: 15,
+    color: 'white',
   },
   titleWrite: {
     fontSize: 20,
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
   },
   titleTextName: {
     fontSize: 23,
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     // top: spacing,
     padding: spacing,
   },
   texts: {
     fontSize: 15,
-    color: 'black',
+    color: 'white',
     paddingHorizontal: spacing * 3,
     left: 10,
     top: spacing * 2.5,
@@ -173,7 +173,7 @@ const globalStyle = StyleSheet.create({
   },
   iconText: {
     fontSize: 12,
-    color: 'black',
+    color: 'white',
     textAlign: 'center',
   },
   headerTitle: {
@@ -189,15 +189,7 @@ const globalStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: BACKCOLOR,
-    // padding: 10,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.22,
-    // shadowRadius: 2.22,
-    // elevation: 3,
+
     height: HEIGHT / 3.4,
   },
   image: {
@@ -227,7 +219,7 @@ const globalStyle = StyleSheet.create({
 
     // position:'absolute',
   },
-  terms: {fontSize: 11, color: 'black', textAlign: 'center'},
+
   profilImage: {
     width: width / 4,
     height: width / 4,
