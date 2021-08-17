@@ -1,13 +1,13 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React, {FC} from 'react';
-import MainStack from './mainStack';
+import MainNav from './MainNav';
 
-const MainNav: FC = () => {
+const IndexNavigation: FC = () => {
   return (
     <NavigationContainer>
-      <MainStack />
+      <MainNav />
     </NavigationContainer>
   );
 };
 
-export default MainNav;
+export default IndexNavigation;

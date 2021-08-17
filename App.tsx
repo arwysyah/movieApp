@@ -1,15 +1,14 @@
 import React, {ReactNode} from 'react';
-import Home from './src/screen/Home';
 import {StatusBar} from 'react-native';
-import SplashScreen from './src/screen/splashScreen';
-import MainNav from './src/navigations';
-('./src/navigations/mainStack');
+import IndexNavigation from './src/navigations';
+import BottomNavigation from './src/navigations/bottom/ BottomNavigation';
+import MainNav from './src/navigations/MainNav';
 
 const App: ReactNode = () => {
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" />
-      <MainNav />
+      <IndexNavigation />
       {/* <Home /> */}
     </>
   );

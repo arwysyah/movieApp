@@ -76,7 +76,7 @@ export default function SplashScreen({navigation}: Props) {
     //     useNativeDriver: true,
     //   }).start();
     await setTimeout(() => {
-      navigation.navigate('Home');
+      navigation.navigate('BottomNavigation');
     }, 600);
   }
   const rotateImage = rotateValue.interpolate({

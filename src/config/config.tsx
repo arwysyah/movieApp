@@ -8,7 +8,7 @@ export const latestMoviesUrl: string =
 export const topRatedMoviesUrl: string =
   'https://api.themoviedb.org/3/movie/top_rated?api_key=';
 export const PopularTvShowsUrl: string =
-  'https://api.themoviedb.org/3/tv/popular?api_key';
+  'https://api.themoviedb.org/3/tv/popular?api_key=';
 export const tvOnTheAirUrl: string =
-  'https://api.themoviedb.org/3/tv/on_the_air?api_key';
+  'https://api.themoviedb.org/3/tv/on_the_air?api_key=';
 export const imageUrl: string = 'https://image.tmdb.org/t/p/w500';

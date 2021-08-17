@@ -1,43 +1,71 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import axios, {AxiosResponse} from 'axios';
-import {token, popularMoviesUrl} from '../config/index';
-import {IStateData} from './utils/Interface';
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+
 import HorizontalScreen from '../components/HorizontalScreen';
 import VerticalContent from '../components/VerticalContent';
 
+import {globalStyle, width} from '../components/styles';
+
+import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList, Stacks} from '../screen/utils/Interface';
+import {useNavigation} from '@react-navigation/native';
 export type Props = {
   navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
 };
 
 const Home: React.FC = () => {
-  const [data, setData] = useState<IStateData[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
-  useEffect(() => {
-    fetchDataMovies();
-  }, []);
-
-  const fetchDataMovies = (): void => {
-    setLoading(true);
-    axios
-      .get<IStateData[]>(popularMoviesUrl + token)
-      .then((response: AxiosResponse) => setData(response.data.results))
-      .then(() => setLoading(false));
-  };
-
+  const navigation: Props = useNavigation();
   return (
-    <ScrollView style={styles.container}>
-      <View>
-        <HorizontalScreen />
-      </View>
-      <View>
-        <ScrollView>
-          <VerticalContent />
-        </ScrollView>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={{alignItems: 'center', marginTop: 20}}
+        onPress={() => navigation.navigate('Search')}>
+        <Text style={{color: 'white'}}>Search</Text>
+      </TouchableOpacity>
+      <ScrollView style={styles.container}>
+        <View>
+          <HorizontalScreen />
+        </View>
+        <View
+          style={{
+            position: 'absolute',
+            width: width,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
+          <View style={{alignItems: 'center'}}>
+            <Text
+              style={[
+                globalStyle.headerTitle,
+                {color: 'white', top: 50, position: 'absolute', zIndex: 8},
+              ]}>
+              {' '}
+              Popular Movies
+            </Text>
+          </View>
+        </View>
+
+        <View>
+          <Text
+            style={[
+              globalStyle.headerTitle,
+              {color: 'white', position: 'absolute', zIndex: 8, top: -30},
+            ]}>
+            {' '}
+            List Movies
+          </Text>
+          <ScrollView>
+            <VerticalContent from={'Home'} />
+          </ScrollView>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

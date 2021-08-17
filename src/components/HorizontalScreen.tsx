@@ -102,7 +102,7 @@ const HorizontalScreen: React.FC = () => {
             style={styles.img}
             resizeMode="cover"
           />
-          <Text style={styles.fullname}>
+          <Text style={[styles.fullname]}>
             {item.original_title}
             {/* fullName */}
           </Text>
