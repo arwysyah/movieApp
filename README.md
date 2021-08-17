@@ -53,6 +53,7 @@ npx react-native run-android
 ```Typescript
 
 Android only (cause have no XCODE)
+Didnt support Jest Test
 ```
 
 Copyright © 2021 Arwy Syahputra Siregar a.k.a kenzo
