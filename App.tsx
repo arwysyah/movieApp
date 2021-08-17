@@ -1,14 +1,16 @@
 import React, {ReactNode} from 'react';
 import {StatusBar} from 'react-native';
 import IndexNavigation from './src/navigations';
-import BottomNavigation from './src/navigations/bottom/ BottomNavigation';
-import MainNav from './src/navigations/MainNav';
+import {store} from './src/components/redux/store';
+import {Provider} from 'react-redux';
 
 const App: ReactNode = () => {
   return (
     <>
-      <StatusBar translucent backgroundColor="transparent" />
-      <IndexNavigation />
+      <Provider store={store}>
+        <StatusBar translucent backgroundColor="transparent" />
+        <IndexNavigation />
+      </Provider>
       {/* <Home /> */}
     </>
   );

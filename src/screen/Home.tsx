@@ -9,18 +9,15 @@ import {
 
 import HorizontalScreen from '../components/HorizontalScreen';
 import VerticalContent from '../components/VerticalContent';
-
 import {globalStyle, width} from '../components/styles';
-
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList, Stacks} from '../screen/utils/Interface';
-import {useNavigation} from '@react-navigation/native';
-export type Props = {
+
+type Props = {
   navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
 };
 
-const Home: React.FC = () => {
-  const navigation: Props = useNavigation();
+const Home: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -61,7 +58,7 @@ const Home: React.FC = () => {
             List Movies
           </Text>
           <ScrollView>
-            <VerticalContent from={'Home'} />
+            <VerticalContent from={'Home'} navigation={navigation} />
           </ScrollView>
         </View>
       </ScrollView>

@@ -12,10 +12,10 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {IMoviesData} from '../screen/utils/Interface';
+
+import {useSelector, useDispatch} from 'react-redux';
+import {SET_GET_TV_POPULAR} from '../components/redux/action';
 import {globalStyle} from '../components/styles';
-// import {StackNavigationProp} from '@react-navigation/stack';
-// import {RootStackParamList, Stacks} from '../screen/utils/Interface';
-// import {useNavigation} from '@react-navigation/native';
 import {token, PopularTvShowsUrl, imageUrl} from '../config/index';
 import axios, {AxiosResponse} from 'axios';
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,9 +29,12 @@ const Spacer = (width - SIZE) / 2;
 const BACKDROPHEIGHT = height * 0.6;
 const Movies: React.FC = () => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
-
+  const globalState = useSelector(state => state);
+  const listTV: IMoviesData = globalState.tvList;
+  console.log(listTV);
   //   const navigation: Props = useNavigation();
-  const [data, setData] = useState<IMoviesData[]>([]);
+
+  const dispatch = useDispatch();
   const [isLoading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     fetchDataMovies();
@@ -41,7 +44,9 @@ const Movies: React.FC = () => {
     setLoading(true);
     axios
       .get<IMoviesData[]>(PopularTvShowsUrl + token)
-      .then((response: AxiosResponse) => setData(response.data.results))
+      .then((response: AxiosResponse) =>
+        dispatch(SET_GET_TV_POPULAR(response.data.results)),
+      )
       .then(() => setLoading(false))
       .catch(error => console.log(error));
   };
@@ -52,13 +57,13 @@ const Movies: React.FC = () => {
         Popular TV
       </Text>
       {isLoading ? (
-        <View style={styles.loading}>
+        <View style={{justifyContent: 'center'}}>
           <ActivityIndicator size="large" color="red" />
         </View>
       ) : (
         <Animated.FlatList
           style={{top: -20}}
-          data={data}
+          data={listTV}
           keyExtractor={(item, index) => index.toString()}
           contentContainerStyle={{alignItems: 'center'}}
           horizontal

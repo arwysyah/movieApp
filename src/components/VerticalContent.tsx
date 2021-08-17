@@ -21,38 +21,38 @@ import {token, baseUrl, imageUrl} from '../config/index';
 import axios, {AxiosResponse} from 'axios';
 import {RootStackParamList, Stacks} from '../screen/utils/Interface';
 import {IStateData} from '../screen/utils/Interface';
-import {useNavigation} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
+import {SET_GET_MOVIES_LIST} from '../components/redux/action';
 
 const spacing: number = 12;
 const SIZE: number = width * 0.62;
 const HEIGHT: number = SIZE - 90;
-export interface Props {
+interface Props {
   navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
-}
-export interface PropState {
-  navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
+  from: String;
 }
 
-const VerticalContent: React.FC = ({from}: PropState) => {
-  const [data, setData] = useState<IStateData[]>([]);
+const VerticalContent: React.FC<Props> = ({from, navigation}) => {
   const [isLoading, setLoading] = useState<Boolean>(true);
   const [rate, setRate] = useState<Number>(0);
   const [isModal, setModalVisible] = useState<Boolean>(false);
   const [id, setId] = useState<number>(0);
   const [text, setText] = useState<string>('');
-  const navigation: Props = useNavigation();
 
   useEffect(() => {
     fetchDataMovies();
   }, []);
+  const globalState = useSelector(state => state);
+  const listMoviesData: IStateData = globalState.movieList;
+
+  const dispatch = useDispatch();
   const handleSubmit = () => {
-    console.log(id, 'id');
     if (rate > 0) {
       axios
         .post<IStateData[]>(
           `https://api.themoviedb.org/3/movie/${id}/rating?api_key=` + token,
         )
-        .then((response: AxiosResponse) => setData(response.data.results))
+        .then((response: AxiosResponse) => console.log(response))
         .then(() => setLoading(false))
         .catch(err => ToastAndroid.show(err.message, ToastAndroid.SHORT));
       setRate(0);
@@ -64,11 +64,13 @@ const VerticalContent: React.FC = ({from}: PropState) => {
     setLoading(true);
     axios
       .get<IStateData[]>(baseUrl + token)
-      .then((response: AxiosResponse) => setData(response.data.results))
+      .then((response: AxiosResponse) =>
+        dispatch(SET_GET_MOVIES_LIST(response.data.results)),
+      )
       .then(() => setLoading(false));
   };
 
-  async function handleRate(value) {
+  async function handleRate(value: number) {
     try {
       setId(value);
       setModalVisible(true);
@@ -78,7 +80,7 @@ const VerticalContent: React.FC = ({from}: PropState) => {
       console.log(e);
     }
   }
-  const filterData: IStateData[] = data.filter(item => {
+  const filterData: IStateData[] = listMoviesData.filter(item => {
     return item.original_title.toLowerCase().indexOf(text.toLowerCase()) !== -1;
   });
 

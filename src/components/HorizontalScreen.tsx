@@ -25,6 +25,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList, Stacks} from '../screen/utils/Interface';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
+import {SET_GET_MOVIES_POPULAR} from '../components/redux/action';
 export type Props = {
   navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
 };
@@ -35,8 +37,11 @@ const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
 
 const HorizontalScreen: React.FC = () => {
   const navigation: Props = useNavigation();
-  const [data, setData] = useState<IStateData[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
+  const globalState = useSelector(state => state);
+  const dataMovies: IStateData = globalState.data;
+
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchDataMovies();
   }, []);
@@ -45,7 +50,9 @@ const HorizontalScreen: React.FC = () => {
     setLoading(true);
     axios
       .get<IStateData[]>(popularMoviesUrl + token)
-      .then((response: AxiosResponse) => setData(response.data.results))
+      .then((response: AxiosResponse) =>
+        dispatch(SET_GET_MOVIES_POPULAR(response.data.results)),
+      )
       .then(() => setLoading(false));
   };
 
@@ -118,7 +125,7 @@ const HorizontalScreen: React.FC = () => {
         </View>
       ) : (
         <AnimatedFlatlist
-          data={data}
+          data={dataMovies}
           keyExtractor={(item, index) => index.toString()}
           contentContainerStyle={{alignItems: 'center'}}
           horizontal
