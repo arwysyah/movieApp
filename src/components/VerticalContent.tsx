@@ -42,7 +42,7 @@ const VerticalContent: React.FC<Props> = ({from, navigation}) => {
   useEffect(() => {
     fetchDataMovies();
   }, []);
-  const globalState = useSelector(state => state);
+  const globalState = useSelector(state => state.reducer);
   const listMoviesData: IStateData = globalState.movieList;
 
   const dispatch = useDispatch();
@@ -84,22 +84,6 @@ const VerticalContent: React.FC<Props> = ({from, navigation}) => {
     return item.original_title.toLowerCase().indexOf(text.toLowerCase()) !== -1;
   });
 
-  // const renderStar = item => {
-  //   const number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  //   return number.map((i, d) => {
-  //     return (
-  //       <View style={{flexDirection: 'row'}} key={d}>
-  //         <MaterialCommunity
-  //           name={'star'}
-  //           color={number[d] <= item ? '#EE6492' : '#EEEEFF'}
-  //           size={16}
-  //           style={{flexDirection: 'row', paddingLeft: 5}}
-  //         />
-  //       </View>
-  //     );
-  //   });
-  // };
-
   let stars = [];
   // Loop 5 times
   for (let i = 1; i <= 10; i++) {
@@ -117,7 +101,7 @@ const VerticalContent: React.FC<Props> = ({from, navigation}) => {
     );
   }
 
-  const rateDriver = star => {
+  const rateDriver = (star: number) => {
     setRate(star);
   };
 

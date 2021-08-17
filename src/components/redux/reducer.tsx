@@ -11,6 +11,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action: {value: any; type: any}) => {
+  console.log(action.value, 'ss');
   switch (action.type) {
     case GET_MOVIES_LIST:
       return {...state, movieList: action.value};

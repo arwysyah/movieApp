@@ -38,7 +38,8 @@ const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
 const HorizontalScreen: React.FC = () => {
   const navigation: Props = useNavigation();
   const [isLoading, setLoading] = useState<boolean>(true);
-  const globalState = useSelector(state => state);
+  const globalState = useSelector(state => state.reducer);
+
   const dataMovies: IStateData = globalState.data;
 
   const dispatch = useDispatch();
