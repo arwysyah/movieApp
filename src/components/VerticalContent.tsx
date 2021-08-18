@@ -151,7 +151,7 @@ const VerticalContent: React.FC<Props> = ({from, navigation}) => {
         decelerationRate={0}
         renderItem={({item}: any) => {
           return (
-            <View style={{height: HEIGHT + 3, width: width}}>
+            <View style={{height: HEIGHT + 3, width: width, top: 30}}>
               {!isLoading ? (
                 <View style={globalStyle.cardContainer}>
                   <View

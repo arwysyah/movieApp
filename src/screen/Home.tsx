@@ -21,9 +21,14 @@ const Home: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={{alignItems: 'center', marginTop: 20}}
+        style={{
+          alignItems: 'center',
+          marginTop: 20,
+          // backgroundColor: 'red',
+          height: 60,
+        }}
         onPress={() => navigation.navigate('Search')}>
-        <Text style={{color: 'white'}}>Search</Text>
+        <Text style={{color: 'white', top: 30}}>Search</Text>
       </TouchableOpacity>
       <ScrollView style={styles.container}>
         <View>
@@ -52,7 +57,7 @@ const Home: React.FC<Props> = ({navigation}) => {
           <Text
             style={[
               globalStyle.headerTitle,
-              {color: 'white', position: 'absolute', zIndex: 8, top: -30},
+              {color: 'white', position: 'absolute', zIndex: 8},
             ]}>
             {' '}
             List Movies
