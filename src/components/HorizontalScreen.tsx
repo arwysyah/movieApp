@@ -24,10 +24,9 @@ import {IStateData} from '../screen/utils/Interface';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList, Stacks} from '../screen/utils/Interface';
-import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import {SET_GET_MOVIES_POPULAR} from '../components/redux/action';
-export type Props = {
+type Props = {
   navigation: StackNavigationProp<RootStackParamList, Stacks.home>;
 };
 
@@ -35,8 +34,7 @@ export type Props = {
 
 const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
 
-const HorizontalScreen: React.FC = () => {
-  const navigation: Props = useNavigation();
+const HorizontalScreen: React.FC<Props> = ({navigation}) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const globalState = useSelector(state => state.reducer);
 

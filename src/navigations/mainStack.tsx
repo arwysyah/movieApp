@@ -1,10 +1,9 @@
 import * as React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import Movies from '../screen/Movies';
 import Home from '../screen/Home';
-import Whistlist from '../screen/Search';
 
 function MyTabBar({state, descriptors, navigation}) {
   return (
