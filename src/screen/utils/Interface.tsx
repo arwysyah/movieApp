@@ -1,4 +1,5 @@
 export interface IStateData {
+  filter(arg0: (item: any) => boolean): IStateData[];
   adult: boolean;
   backdrop_path: string;
   genre_ids: [string];

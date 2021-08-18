@@ -27,7 +27,7 @@ const Home: React.FC<Props> = ({navigation}) => {
       </TouchableOpacity>
       <ScrollView style={styles.container}>
         <View>
-          <HorizontalScreen />
+          <HorizontalScreen navigation={navigation} />
         </View>
         <View
           style={{
