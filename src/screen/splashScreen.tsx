@@ -105,7 +105,7 @@ export default function SplashScreen({navigation}: Props) {
           <Animated.View style={[drawerOne]} />
           <Animated.View style={[drawerTwo]} />
         </View>
-        <Animated.Text
+        {/* <Animated.Text
           style={{
             color: 'black',
             position: 'absolute',
@@ -115,7 +115,7 @@ export default function SplashScreen({navigation}: Props) {
             opacity,
           }}>
           Press Button
-        </Animated.Text>
+        </Animated.Text> */}
         {hide === false && (
           <Animated.View
             style={[
